@@ -1,3 +1,8 @@
+---
+title: Android Touch 事件的传递与处理
+tags: [Android]
+---
+
 一、MotionEvent
 
 MotionEvent 是 Android 系统中报告动作输入（如触摸屏幕，滚动球，鼠标）等事件的类。其中有整形数的 Action 和描述事件的各种浮点型坐标。MotionEvent 的 action 的最低一个字节，其取值我们常见的 ACTION_DOWN, MOVE, POINTER_DOWN, POINTER_UP, UP, CANCEL (后面可能简称为 DOWN 等等) 这些了。虽然我们可能会粗暴的使用下面这样的方式：
@@ -25,7 +30,7 @@ index 和 id 的区别。举个例子就清楚了。假设起始时，右手的�
 
 MotionEvent 的 getX() 与 getX(int pointerIndex), 前者等价于后者的 getX(0), getY 类似. getPointerIdBits() 返回一个类似于标志数的东西，其二进制从右向左数，第 i 位为1表示存在 id 是 i 的 pointer，此处应看源码。可以想见此结果的二进制形式中1的个数即为多点触控的点数。
 
-![pointer_id_bits](http://tao93.top/wp-content/uploads/2018/08/pointer_id_bits.png)
+![pointer_id_bits](http://tao93.top/images/2018/09/01/1535807958.png)
 
 二、Touch 事件的生成
 
@@ -150,7 +155,7 @@ class View {
 
 以上的介绍，其实是省略了不少信息，真正的事件分发过程，要更复杂不少，下面是我尝试画的一张流程图 (把图和源码对照着理解可能会有些帮助)：
 
-![](http://tao93.top/wp-content/uploads/2018/08/dispatch_procedure.png)
+![](http://tao93.top/images/2018/09/01/1535809116.png)
 
 对于上图，有一些需要解释的地方：
 

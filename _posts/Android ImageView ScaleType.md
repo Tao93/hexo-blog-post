@@ -1,3 +1,8 @@
+---
+title: Android ImageView ScaleType
+tags: [Android]
+---
+
 我经常记不住 Android 中 ImageView 的各种 ScaleType 的含义，看文档一时也确定不了，所以干脆把所有 ScaleType 挨个尝试了一遍，然后清楚的记录下来，以备今后查阅。
 
 **CEMTER**

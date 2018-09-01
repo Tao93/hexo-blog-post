@@ -1,3 +1,8 @@
+---
+title: 常用的 Bash 命令总结
+tags: [Linux,Bash]
+---
+
 这篇记录是我看 [The Linux Command Line](http://linuxcommand.org/tlcl.php) 后为了总结而写的，目的是便于自己随时查阅。The Linux Command Line 是我相当喜欢的一本电子书，它是一本值得一页一页看下去的书。
 
 **cp**

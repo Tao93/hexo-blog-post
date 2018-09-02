@@ -77,15 +77,15 @@ private ServiceConnection mMsgConnection = new ServiceConnection() {
 
 然后，我在 Message 类的 readFromParcel 方法中打上断点，当代码执行到断点处时，先验证 getClass().getClassLoader() 无法加载到自定义的 Book 类：
 
-![](http://tao93.top/images/2018/09/01/1535789126.png)
+![](https://tao93.top/images/2018/09/01/1535789126.png)
 
 然后验证主线程的 Thread.getContextClassLoader 可以加载到 Book 类：
 
-![](http://tao93.top/images/2018/09/01/1535789156.png)
+![](https://tao93.top/images/2018/09/01/1535789156.png)
 
 最后验证使用可以加载到 Book 类的 ClassLoader 的话，是可以成功反序列化得到 Book 对象的：
 
-![](http://tao93.top/images/2018/09/01/1535789190.png)
+![](https://tao93.top/images/2018/09/01/1535789190.png)
 
 插一句，这个 readFromParcel 不是运行在主线程，而是运行在 server 进程的 Binder 线程池中的。线程池中的线程的 getContextClassLoader() 结果是 null。
 

@@ -105,7 +105,7 @@ make -j8
 
 那么参考 https://groups.google.com/forum/#!topic/android-building/D1-c5lZ9Oco 给出的方法，需要更改 external/bison 这个项目的代码了。此时如果前面我们把 .repo 隐藏目录剪贴走了，那么现在就需要把它的一部分拷贝回来，即 external/bison 这个项目所需的 Git track 文件，通过查看 external/bison/.git 中的符号链接，我们可以知道哪些文件需要拷贝回来。
 
-![](http://tao93.top/images/2018/09/01/1535786626.png)
+![](https://tao93.top/images/2018/09/01/1535786626.png)
 
 红框中就是需要拷贝回来的目录。然后我们执行下面的更改：
 
@@ -134,7 +134,7 @@ make -j8
 
 现在我们要去 [Driver Binaries](https://developers.google.com/android/drivers) 下载适用于 Pixel XL 的驱动文件。这个页面很长，要在其中找到我们需要的驱动文件，需要一个细分版本号，在 [代号、标签和版本号](https://source.android.com/setup/start/build-numbers)这个页面，可以找到我之前使用的 android\-8.1.0\_r20 分支对应的细分分支是 OPM2.171019.029，使用这个细分分支，就可以在 [Driver Binaries](https://developers.google.com/android/drivers) 下载到用于 Pixel XL 的准确的驱动文件了，如下图所示，一共是两个文件，下载之后解压，发现是两个 shell 脚本，名字分别是 extract-qcom-marlin.sh 和 extract-google_devices-marlin.sh。
 
-![](http://tao93.top/images/2018/09/01/1535786865.png)
+![](https://tao93.top/images/2018/09/01/1535786865.png)
 
 现在，将上一步得到的两个 shell 脚本都复制到 AOSP 源码根目录，然后分别执行以下。接下来，需要以下步骤来编译得到一些额外的文件，其实我也不知道是什么文件。接下来的步骤：
 
@@ -203,17 +203,17 @@ cp /Volumes/android/android-8.1.0_r20/android.iml /Volumes/android/android-8.1.0
 
 然后，就可以使用 IDEA 以打开项目的形式打开此 aosp_part 目录了。打开后，因为 libcore 中就已经有了 JDK 库代码，所以我们需要让 aosp_part 项目不使用电脑中的 JDK。方法是在 IDEA 打开的 aosp_part 项目，File → Project Structure → SDKs，然后如下图所示：
 
-![](http://tao93.top/images/2018/09/01/1535787196.png)
+![](https://tao93.top/images/2018/09/01/1535787196.png)
 
 点击加号，新建一个 JDK 并将新的 JDK 命名为 aosp_jdk_1.8，新建的 JDK 一开始会和已有的那个 JDK 1.8 一模一样，包含了库代码，所以我们需要把 aosp_jdk_1.8 的 ClassPath tab 中的所有 .jar 文件移除，这样 aosp_jdk_1.8 成了一个空的 JDK，将被用于 aosp_part 项目，而其他的 IDEA 项目可以依旧使用 JDK 1.8，互不影响。
 
 在上面的窗口中，在左侧切换到 Modules tab，然后如下图，切换到 dependencies tab：
 
-![](http://tao93.top/images/2018/09/01/1535787229.png)
+![](https://tao93.top/images/2018/09/01/1535787229.png)
 
 在上面这个界面会有非常多的 .jar ，把它们全部移除，然后再添加前面那个 aosp_jdk_1.8，现在就已经用 IDEA 打开了部分 android 源码了：
 
-![](http://tao93.top/images/2018/09/01/1535787252.png)
+![](https://tao93.top/images/2018/09/01/1535787252.png)
 
 接下来是最后一步了，在 IDEA 中调试代码。
 
@@ -223,12 +223,12 @@ cp /Volumes/android/android-8.1.0_r20/android.iml /Volumes/android/android-8.1.0
 
 打开 monitor 后，鼠标选中需要调试的进程：
 
-![](http://tao93.top/images/2018/09/01/1535787290.png)
+![](https://tao93.top/images/2018/09/01/1535787290.png)
 
 因为今天没带手机，所以上图中是个 vivo 的测试机。
 
 然后在 IDEA 点击调试按钮 (图标是一个绿色的小虫子)，此时如果弹出 Debug tool window 并提示 connected to target VM，则说明可以加断点调试了。
 
-![](http://tao93.top/images/2018/09/01/1535787316.png)
+![](https://tao93.top/images/2018/09/01/1535787316.png)
 
 EOF

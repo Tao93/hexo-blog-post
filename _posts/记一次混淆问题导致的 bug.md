@@ -5,11 +5,11 @@ tags: [Android]
 
 最近把 [Card.IO](https://github.com/card-io/card.io-Android-SDK) 改造成一个 aar 依赖提供给公司的项目使用。这个 aar 中使用了几个 so 库。只不过没有提供 armeabi 类型的 so 库，而只有 armeabi-v7a 和 armeabi-v8a 之类的 so 库。所以初次提供给公司项目使用时，出现了找不到 so 的错误，也就是 UnsatisfiedLinkError 错误。也就是下面这样的提示：
 
-![](https://tao93.top/images/2018/09/01/1535807292.png)
+![](http://tao93.top/images/2018/09/01/1535807292.png)
 
 后面我想尽办法提供了 armeabi 类型的 so 库，这个问题就算告一段落了，然后这还不是结束。今天，测试又发了一段崩溃日志，也就是下面这样的日志：
 
-![](https://tao93.top/images/2018/09/01/1535807316.png)
+![](http://tao93.top/images/2018/09/01/1535807316.png)
 
 因为之前出现过找不到 so 库的问题，所以乍一看上面的日志，我们都以为又是找不到 so 库 (为我们的菜表示羞愧 🤩)。然后经过上网查找，并和 native 的代码对比，我才意识到，上面的日志其实是 so 库是找到了的，只不过是加载 so 库时，调用 JNI_onLoad 这个 native 方法时出错了。此外，向测试要了 debug 包，发现没有问题，所以初步断定是混淆的问题，然后就是排查了。
 

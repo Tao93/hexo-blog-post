@@ -32,13 +32,13 @@ md5 aosp-latest.tar
 
 另一个令人惊喜的事，最近的 aosp 体积居然减小了，之前几个月 aosp 体积那是一路蹭蹭蹭往上涨，涨到了 40 多 GB：
 
-[](http://tao93.top/images/2018/09/06/1536224194.png)
+![](http://tao93.top/images/2018/09/06/1536224194.png)
 
 接下来，按照之前我的 post [macOS 系统编译 Android 8.1.0 源码全过程](http://tao93.top/2018/09/01/macOS%20系统编译%20Android%208.1.0%20源码全过程/) 中的描述，建立 sparse image 并挂载，然后将 aosp-latest.tar 解压到 sparse image 中。我在 sparse image 中建立了一个 aosp 目录，然后把 aosp-latest.tar 解压到了 aosp 目录中，此时 aosp 目录中仅有一个 .repo 目录。接下来我们来把最新的 Android Pie 分支的代码 checkout。
 
 另外，要先知道我们需要哪个分支，在 [这里](https://source.android.com/setup/start/build-numbers) 可以看到所有代码分支与代号。在这个网页如果显示为中文，就拉到最底部在左下角把语言换成英文，因为英文才有最新的 Android Pie 相关信息。如下图所示，根据自己想要用于什么设备来选择分支，比如如果是 Pixel 2 设备那么最新的分支就是 android-9.0.0_r6，而不能使 android-9.0.0_r7 和 android-9.0.0_r8，我当时用的是 android-9.0.0_r2
 
-[](http://tao93.top/images/2018/09/06/1536224982.png)
+![](http://tao93.top/images/2018/09/06/1536224982.png)
 
 ```bash
 # prepare repo
@@ -76,4 +76,15 @@ lunch
 make -j8
 ```
 
-非常顺利，3 个半小时就成功编译了，简直令人感动。相比起来，之前的 Android 源码编译会出现各种各样的错误，让人非常抓狂。
+非常顺利，上次我选择 aosp_marlin-userdebug 用了 3 个半小时就成功编译了，简直令人感动。相比起来，之前的 Android 源码编译会出现各种各样的错误，让人非常抓狂。
+
+因为我手里的 Pixel XL 已经安装了 factory Android system，里面有我很多资料和数据了，另外 userdebug 类型的 Android 是没有 Google 服务的，并且连 Google Photos、Camera、Gmail 等应用全都没有，所以我就没再把编译出来的 userdebug 类型系统安装到手机中。于是，我今天选择 aosp_x86_64-eng 重新编译了一遍，这个 aosp_x86_64-eng 适用于在 x86 电脑上运行模拟器 (没有手机就只好现在电脑上用模拟器试试了)。这一次用了 4 个多小时完成编译，同样非常顺利：
+
+![](http://tao93.top/images/2018/09/07/1536304013.png)
+
+编译完成后，直接运行 emulator 命令即可运行模拟器。需要注意，这个 emulator 命令是运行 lunch 命令而添加的，也就是如果退出了电脑的 terminal，然后再进入 aosp 根目录，需要重新运行 source build/envsetup.sh 和 lunch 然后才能运行 emulator。以下是模拟器运行的截图：
+
+![](http://tao93.top/images/2018/09/07/1536305206.png)
+
+上面 3 张截图中，左边两张截图可以看到系统是很简陋的，Google 的许多应用都没有，连 Google service 也没有。最有一张截图，显示了 Android 版本号是 9，另外最底部的 Build Number 显示了这是 aosp_x86_64-eng 类型的构建，PPR1.180610.010 是 Build 代号，在 [这里](https://source.android.com/setup/start/build-numbers) 可以看到，而 20180907.105244 则是构建时间。
+

@@ -3,14 +3,6 @@ title: macOS 编译 Android 9 源码
 tags: [AOSP,Android,macOS]
 ---
 
-
-#### test
-
-```
-mstr://?url=https%3A%2F%2Fenv-108450.customer.cloud.microstrategy.com%3A443%2FMicroStrategyMobile%2Fservlet%2FtaskProc%3FtaskId%3DgetMobileConfiguration%26taskEnv%3Dxml%26taskContentType%3Dxmlanf%26configurationID%3Ded898ae5-739f-4f8a-960a-1571a8be575b&authMode=1&dt=2
-```
-
-
 #### 环境：
     macOS High Sierra 10.13.6 with 16GB RAM
     XCode 9.4.1

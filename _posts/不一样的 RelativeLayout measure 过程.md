@@ -14,45 +14,45 @@ tags: [Android]
 究其原因，可以从 RelativeLayout 中的 onMeasure 方法找。
 
 ```java
-	@Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-	        for (int i = 0; i < count; i++) {
-            final View child = views[i];
-            if (child.getVisibility() != GONE) {
-                final LayoutParams params = (LayoutParams) child.getLayoutParams();
+@Override
+protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        for (int i = 0; i < count; i++) {
+        final View child = views[i];
+        if (child.getVisibility() != GONE) {
+            final LayoutParams params = (LayoutParams) child.getLayoutParams();
 
-                applyVerticalSizeRules(params, myHeight, child.getBaseline());
-                measureChild(child, params, myWidth, myHeight);
-                ...
-    }
+            applyVerticalSizeRules(params, myHeight, child.getBaseline());
+            measureChild(child, params, myWidth, myHeight);
+            ...
+}
 ```
 
 上面是 RelativeLayout#onMeasure 的片段，可知对所有 child 调用了 measureChild 方法，而这是个 RelativeLayout 的 private 方法：
 
 ```java
 /**
-     * Measure a child. The child should have left, top, right and bottom information
-     * stored in its LayoutParams. If any of these values is VALUE_NOT_SET it means
-     * that the view can extend up to the corresponding edge.
-     *
-     * @param child Child to measure
-     * @param params LayoutParams associated with child
-     * @param myWidth Width of the the RelativeLayout
-     * @param myHeight Height of the RelativeLayout
-     */
-    private void measureChild(View child, LayoutParams params, int myWidth, int myHeight) {
-        int childWidthMeasureSpec = getChildMeasureSpec(params.mLeft,
-                params.mRight, params.width,
-                params.leftMargin, params.rightMargin,
-                mPaddingLeft, mPaddingRight,
-                myWidth);
-        int childHeightMeasureSpec = getChildMeasureSpec(params.mTop,
-                params.mBottom, params.height,
-                params.topMargin, params.bottomMargin,
-                mPaddingTop, mPaddingBottom,
-                myHeight);
-        child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
-    }
+ * Measure a child. The child should have left, top, right and bottom information
+ * stored in its LayoutParams. If any of these values is VALUE_NOT_SET it means
+ * that the view can extend up to the corresponding edge.
+ *
+ * @param child Child to measure
+ * @param params LayoutParams associated with child
+ * @param myWidth Width of the the RelativeLayout
+ * @param myHeight Height of the RelativeLayout
+ */
+private void measureChild(View child, LayoutParams params, int myWidth, int myHeight) {
+    int childWidthMeasureSpec = getChildMeasureSpec(params.mLeft,
+            params.mRight, params.width,
+            params.leftMargin, params.rightMargin,
+            mPaddingLeft, mPaddingRight,
+            myWidth);
+    int childHeightMeasureSpec = getChildMeasureSpec(params.mTop,
+            params.mBottom, params.height,
+            params.topMargin, params.bottomMargin,
+            mPaddingTop, mPaddingBottom,
+            myHeight);
+    child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+}
 ```
 
 从上述方法看，先获取到 child measureSpec，然后依次为参数来 measure 每个 child。再进入到 RelativeLayout#getChildMeasureSpec 这个方法中看看下面的逻辑：
@@ -96,7 +96,7 @@ if (childStart != VALUE_NOT_SET && childEnd != VALUE_NOT_SET) {
 }
 ```
 
-从上面可以看到，chileSpecMode 赋值为 MeasureSpec.AT_MOST 的地方只有 27 行一个地方，也就是只要 child 声明为 match_parent，那么 child 的 specMode 不出意外就会是 AT_MOST。而 AT_MOST 意味着此 child 为根节点的 view tree 的测量结果将会是此 child 的 specSize，而这个 specSize 显然就是 RelativeLayout 能达到的最大 size (可能需要减去 padding，RelativeLayout 其它 child 占据的空间等)。
+从上面可以看到，chileSpecMode 赋值为 MeasureSpec.AT_MOST 的地方只有 27 行一个地方，也就是只要 child 声明为 match_parent，那么 child 的 specMode 不出意外就会是 EXACTLY。而 EXACTLY 意味着此 child 为根节点的 view tree 的测量结果将会是此 child 的 specSize，而这个 specSize 显然就是 RelativeLayout 能达到的最大 size (可能需要减去 padding，RelativeLayout 其它 child 占据的空间等)。
 
 顺便再看看 LinearLayout 等等为啥不是这样的，事实上 LinearLayout 等使用的是 ViewGroup 这个抽象基类中的 getChildMeasureSpec 方法：
 

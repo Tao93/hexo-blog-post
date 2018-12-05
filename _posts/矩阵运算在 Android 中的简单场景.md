@@ -102,7 +102,7 @@ public static Bitmap createBitmap(Bitmap source, int x, int y, int width, int he
 
 用 3×3 矩阵在 xy 平面内变换，可以分为 translate, rotate, scale, skew 一共 4 种，表示这四种操作的矩阵分别记作：
 
-$$ T(a, b),\ R(\theta),\ S(u, v),\ SK(p, q) $$
+$$ T(a, b),\ R(\theta),\ S(u, v),\ SKx(\theta), SKy(\theta) $$
 
 那么它们分别是：
 
@@ -126,8 +126,14 @@ $$
 \end{bmatrix}
 ,\ 
 \begin{bmatrix}
-   1 & tan(p) & 0 \\
+   1 & tan(\theta) & 0 \\
    tan(q) & 1 & 0 \\
+   0 & 0 & 1
+\end{bmatrix}
+,\ 
+\begin{bmatrix}
+   1 & 0 & 0 \\
+   tan(\theta) & 1 & 0 \\
    0 & 0 & 1
 \end{bmatrix}
 $$
@@ -137,4 +143,37 @@ $$
 1. 向 +x 方向平移 a 且向 +y 方向平移 b；
 2. 以原点为中心在 xy 平面旋转 theta 角度；
 3. 以原点为 pivot，x 方向和 y 方向分别伸缩值为 u 和 v 的比例；
-4. 
+4. 每个点的 $x$ 坐标变为 $x + y·tan(\theta)$，而 $y$ 坐标不变，视觉表现为图形向 +y 方向倾斜，倾斜角度为 $\theta$;
+5. 每个点的 $y$ 坐标变为 $x·tan(\theta) + y$，而 $x$ 坐标不变，视觉表现为图形向 +x 方向倾斜，倾斜角度为 $\theta$.
+
+注意, $T(a, 0)$ 和 $T(0, b)$ 组合起来的变换，等价于 $T(a, b)$，且和组合顺序无关，这从矩阵乘法也可以看出来：
+
+$$
+\begin{bmatrix}
+1 & 0 & a \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}·
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & b \\
+0 & 0 & 1
+\end{bmatrix}=
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & b \\
+0 & 0 & 1
+\end{bmatrix}·
+\begin{bmatrix}
+1 & 0 & a \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}=
+\begin{bmatrix}
+1 & 0 & a \\
+0 & 1 & b \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+同样的，$S(u, 0)$ 和 $S(0, v)$ 组合起来等价于 $S(u, v)$ 且和组合顺序无关。

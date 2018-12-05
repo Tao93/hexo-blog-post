@@ -1,6 +1,7 @@
 ---
 title: 矩阵运算在 Android 中的简单场景
 tags: [Android]
+mathjax: true
 ---
 
 让我们先从位于 android.graphics 包中的 Bitmap 类的一个方法开始说起，也就是 createBitmap(Bitmap source, int x, int y, int width, int height, Matrix m, boolean filter) 这样一个方法。这个方法中有个矩阵参数，通过传入此矩阵参数，可以将 source Bitmap 经过一定的转换再创建目标 Bitmap。那么这个矩阵是怎么起作用的呢？先看一段示例代码：

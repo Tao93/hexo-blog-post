@@ -21,7 +21,12 @@ tags: [Firmware, Android, Samsung]
 
 #### 企图用虚拟机，失败
 
-三星的内部刷机工具 odin，只能用 Windows 运行，我手里只有 Mac，所以我一开始希望用 virtual box 中的 win10 虚拟机来操作。我从硬盘里面把很久前备份的 win10 的 virtual disk image (也就是一个 .vdi 文件) 拷贝到电脑，然后以此新建一个虚拟机，成功的运行，但是鼓捣了半天，也无法让这个虚拟机连接 USB 设备，别说这台 tablet 不行，连 U 盘都不行。VirtualBox VM Expansion Pack 安装了，在 win10 里面也安装了 Guest Additions，USB device filters 也配置了，就是不行，只能放弃，找同事借用 Windows 台式机。
+三星的内部刷机工具 odin，只能用 Windows 运行，我手里只有 Mac，所以我一开始希望用 virtual box 中的 win10 虚拟机来操作。我从硬盘里面把很久前备份的 win10 的 virtual disk image (也就是一个 .vdi 文件) 拷贝到电脑，然后以此新建一个虚拟机，成功的运行，但是鼓捣了半天，也无法让这个虚拟机连接 USB 设备，别说这台 tablet 不行，连 U 盘都不行。VirtualBox VM Extension Pack 安装了，在 win10 里面也安装了 Guest Additions，USB device filters 也配置了，就是不行，只能放弃，找同事借用 Windows 台式机。
+
+--
+**2019年1月1日更新**：
+我后面 VirtualBox 装 Windows 虚拟机是可以连接到 Android 设备的，并且可以刷机，见
+--
 
 #### 失败的刷机
 

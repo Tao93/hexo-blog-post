@@ -33,3 +33,11 @@ tags: [GSI, Project Treble]
 放几张截图：
 
 ![](http://tao93.top/images/2019/01/01/1546351524.png)
+
+最后还有一点，这次我是用 Virtual Box 中的 Win 10 虚拟机刷的，让 VirtualBox 中的 Win 10 虚拟机连接上 Android 设备，需要给 VirtualBox 安装 extension pack，在 Win 10 虚拟机中安装 guest additions，然后还需要在此 win 10 虚拟机的设置中添加对应的 USB filter (需要设备连接上后才能添加)，并按照 USB 类型勾选 USB 2.0 还是 3.0，如下图所示：
+
+![](http://tao93.top/images/2019/01/01/1546352547.png)
+
+最后，在设备连接上电脑后，把 win 10 的窗口放在最前面，然后再 macOS 的菜单栏勾选对应的 USB device，勾选的话，就是 win 10 虚拟机连接词 USB 设备，否则驾驶 macOS 连接此 USB device，如下图：
+
+![](http://tao93.top/images/2019/01/01/1546353760.png)

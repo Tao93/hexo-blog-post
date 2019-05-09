@@ -23,8 +23,9 @@ tags: [GSI, Project Treble]
 后来那个 xda 帖子的作者回复我说「全程没看到我刷 Magisk 的描述，但 Magisk 是必要的，否则会 boot loop」。我确实没刷 Magisk，因为我并没有像 root，我只想搞个 TWRP 然后刷 GSI 而已。于是我就刷了 Magisk，发现不在 boot loop 了，然后再[这里](https://github.com/phhusson/treble_experimentations/releases/tag/v108) 下载了 system-arm64-aonly-gapps-su.img.xz 这个 GSI 并刷入，这次终于成功了，进入了一个类似 AOSP user-debug 类型的 aosp 系统，很简陋，连 Contact，Settings，等这些应用都是 aosp 版本的，和正常的很不一样，相机应用则直接打开就 crash。顺便记录一下 TWRP 刷 GSI 的方法，很简单：
 
 1. 进入 TWRP，wipe 一下；
-2. 进入 install，切换到 install image 模式，找到 GSI，flash；
-3. 重启
+2. 进入 install，切换到 install image 模式，找到 GSI；
+3. partition 选择 system image，flash；
+4. 重启
 
 关键是，这个 aosp 系统有些 bug，最受不了的 bug 是，锁屏、旋转时屏幕都会变形一下，截屏得到的图片也是会变形一下。这和我最初看到的 xda 帖子里面那人说的只是扬声器没有全部发声差远了。所以我就想找更好些的 GSI。问了那个人，结果没回复我。
 

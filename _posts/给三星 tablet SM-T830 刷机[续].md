@@ -42,3 +42,15 @@ tags: [GSI, Project Treble]
 最后，在设备连接上电脑后，把 win 10 的窗口放在最前面，然后再 macOS 的菜单栏勾选对应的 USB device，勾选的话，就是 win 10 虚拟机连接词 USB 设备，否则驾驶 macOS 连接此 USB device，如下图：
 
 ![](http://tao93.top/images/2019/01/01/1546353760.png)
+
+**2019 年 5 月 29 日更新**
+
+最近得知三星已经给一些设备推送了 Android Pie 的更新，而组里面几部 Tab S4 都是运行国内版系统的国行机器，所以没有收到更新通知，所以我就有了把我手里的 Tab S4 刷回基于 Android Pie 的国外版三星系统。
+
+步骤很简单，先用 SamFirm tool 下载基于 Android Pie 的 stock firmware 包，然后设备先进入 TWRP recovery (我之前刷了 TWRP，所以有这个)，然后点 Reboot 再点 Download 即可进入三星设备的 Download 模式，然后就是很简单地使用 odin 工具把系统刷进去就好了。
+
+注意 Download 模式和 Recovery 是不一样的。TWRP 是 custom recovery，而三星自带的 recovery 是下面这样的:
+
+![](http://tao93.top/images/2019/05/29/1559062868.png
+
+即使用 TWRP 取代了自带的 Recovery，我们依然可以进入 Download 模式，从而用 odin 刷回到官方 firmware。

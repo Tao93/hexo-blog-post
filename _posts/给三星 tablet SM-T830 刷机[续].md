@@ -49,8 +49,8 @@ tags: [GSI, Project Treble]
 
 步骤很简单，先用 SamFirm tool 下载基于 Android Pie 的 stock firmware 包，然后设备先进入 TWRP recovery (我之前刷了 TWRP，所以有这个)，然后点 Reboot 再点 Download 即可进入三星设备的 Download 模式，然后就是很简单地使用 odin 工具把系统刷进去就好了。
 
-注意 Download 模式和 Recovery 是不一样的。TWRP 是 custom recovery，而三星自带的 recovery 是下面这样的:
+注意 Download 模式和 Recovery 是不一样的。TWRP 是 custom recovery，而三星自带的 recovery 是类似下面这样的:
 
-![](http://tao93.top/images/2019/05/29/1559062868.png
+![](http://tao93.top/images/2019/05/29/1559062868.png)
 
 即使用 TWRP 取代了自带的 Recovery，我们依然可以进入 Download 模式，从而用 odin 刷回到官方 firmware。

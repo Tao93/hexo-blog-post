@@ -24,14 +24,14 @@ tags: [Firmware, Android, Samsung]
 三星的内部刷机工具 odin，只能用 Windows 运行，我手里只有 Mac，所以我一开始希望用 virtual box 中的 win10 虚拟机来操作。我从硬盘里面把很久前备份的 win10 的 virtual disk image (也就是一个 .vdi 文件) 拷贝到电脑，然后以此新建一个虚拟机，成功的运行，但是鼓捣了半天，也无法让这个虚拟机连接 USB 设备，别说这台 tablet 不行，连 U 盘都不行。VirtualBox VM Extension Pack 安装了，在 win10 里面也安装了 Guest Additions，USB device filters 也配置了，就是不行，只能放弃，找同事借用 Windows 台式机。
 
 
-**2019年1月1日更新**：我后面 VirtualBox 装 Windows 虚拟机是可以连接到 Android 设备的，并且可以刷机，见[给三星 tablet SM-T830 刷机[续]](http://tao93.top/2019/01/01/%E7%BB%99%E4%B8%89%E6%98%9F%20tablet%20SM-T830%20%E5%88%B7%E6%9C%BA[%E7%BB%AD]/) 的最后一部分
+**2019年1月1日更新**：我后面 VirtualBox 装 Windows 虚拟机是可以连接到 Android 设备的，并且可以刷机，见[给三星 tablet SM-T830 刷机[续]](https://tao93.top/2019/01/01/%E7%BB%99%E4%B8%89%E6%98%9F%20tablet%20SM-T830%20%E5%88%B7%E6%9C%BA[%E7%BB%AD]/) 的最后一部分
 
 
 #### 失败的刷机
 
 在同事的台式机上操作之前，我在网上已经看了一段讲解刷机过程的视频，感觉挺简单的，就几个步骤而已。等到开始在 Windows 上面开始弄，我把固件包解压，然后用 odin 开始，这才发现那个视频其实过时了，视频中固件包解压后只有一个文件，但是我解压后其实有 4 个文件。其实这一点 Odin 中都已经提示了，new model 需要 4 个文件：
 
-![](http://tao93.top/images/2018/12/08/1544280785.png)
+![](https://tao93.top/images/2018/12/08/1544280785.png)
 
 所以我的固件包是比较新的，所以有多个文件，但是仔细对比发现有点问题，odin 需要的是 BL, AP, CP, HOME_CSC 4 部分，但是我的固件包解压后 4 个文件的文件名是如下所示 (文件我已经删掉了，所以没法贴出完整文件名)：
 
@@ -46,7 +46,7 @@ tags: [Firmware, Android, Samsung]
 
 于是我就空出 CP 那里不添加文件，其余 3 个添加上，然后 start，结果左边文本框停留在 'setupconnection..'，我一查，发现很多说卡在这一步的，纷纷在求 help。没办法我就只能继续查，有说要先运行 odin 后连接 USB 数据线的(试了不行)。查了一阵，终于查到一个看起来比较靠谱的[方法](https://forum.xda-developers.com/sprint-galaxy-s6/help/odin-stuck-setupconnection-t3574320)，依然是 xda 论坛上的：
 
-![](http://tao93.top/images/2018/12/08/1544281510.png)
+![](https://tao93.top/images/2018/12/08/1544281510.png)
 
 我按照上面说的一步一步走，依然失败，但是没再卡在 setupconnection 了。我总结发现，odin 应该确实有 bug，明明设备连接正常，它就是卡在这一步，这时候可以这么做：1. 重新启动设备，1. 断开 USB 连接，3. 进入 downloading mode，4. 连接 USB 然后再在 odin 中 start，就不会卡在那一步了。
 
@@ -64,7 +64,7 @@ tags: [Firmware, Android, Samsung]
 
 以 abl.elf 为关键字又是一番在网上搜索，最后发现[这个帖子有](http://bbs.gfan.com/android-9245022-1-1.html)人遇到这个问题最后解决了：
 
-![](http://tao93.top/images/2018/12/08/1544281993.png)
+![](https://tao93.top/images/2018/12/08/1544281993.png)
 
 起初我对「固件版本落后于现有版本」这句话不以为然，因为我觉得这不就意味着只能升级不能降级嘛，不科学。但后面我忽然想到，这句话意思可能是刷机不能刷那些版本比设备出厂时系统版本还更旧的固件，就上这个人确实解决了问题，并且我前面下的固件包都是 2018 年 8 月份的，确实有点旧，所以我开始想怎么下最新的用于 SM-T830 的固件。
 
@@ -72,13 +72,13 @@ tags: [Firmware, Android, Samsung]
 
 这时，就又回到开始找固件包的步骤了，网上满是假链接，或者是要注册，要交费的，找得人心累。不过，最后竟然找到一个叫 SamFirm tool 的神器，这个神器可以直接高速下载想要的最新固件，简直不能更棒。如下图所示，输入系统型号，然后选择 auto 模式来查找，就能找到最新的固件，并且下载速度还很快！[这个帖子](https://forum.xda-developers.com/galaxy-tab-s/general/tool-samfirm-samsung-firmware-t2988647)可以下载到这个神器。
 
-![](http://tao93.top/images/2018/12/08/1544283275.png)
+![](https://tao93.top/images/2018/12/08/1544283275.png)
 
 如上图所示，准确地填入型号，填入要下载的固件的国家或地区代号（这里我要填的就是某个外国或国外地区，这样固件包才会有 GMS）。这个国家或地区代号可以从[这里](https://www.sammobile.com/firmwares/galaxy-tab-s4/SM-T830/)找到，我在上一张图中填入的是 XEF，其实就是代表法国。填好后勾选 Auto，然后点击 Check Update，即可检查到最新固件包的信息，我在今天（2018年12月8日）检查到的 SM-T830 的法国版最新固件包如上图箭头所示，是 2018年10月24日更新的。然后就可以在 SamFirm 右边点下载了。建议勾选 Decrypt automatically，否则 下载好固件包后还需要重新解密，费时间。
 
 国家或地区代号截图：
 
-![](http://tao93.top/images/2018/12/08/1544283882.png)
+![](https://tao93.top/images/2018/12/08/1544283882.png)
 
 #### 成功刷机
 

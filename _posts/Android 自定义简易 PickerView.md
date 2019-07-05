@@ -5,7 +5,7 @@ tags: [Android]
 
 最近的做的一项 feature 中，需要使用类似于 iOS 的 UIPickerView 的控件，功能是通过滚动 item 来选择其中一个，也就是下图这样的：
 
-![](http://tao93.top/images/2019/04/07/1554640301.png)
+![](https://tao93.top/images/2019/04/07/1554640301.png)
 
 Android SDK 倒是有一个 NumberPicker 和这个非常类似，不过 NumberPicker 设计有点问题，滚动很慢，即使是手指快速滑动，也只能滚动五六个 items，而 Github 上确实有不少优秀的实现，可以和 iOS 的 UIPickerView 非常相似，不过其代码有些复杂，以至于想要速读代码然后自己写一份也比较费时间。所以，我就想到自己基于 Android 的 ListView 写一个简单的自定义 PickerView。
 

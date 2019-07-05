@@ -549,20 +549,20 @@ public class MainActivity extends AppCompatActivity {
 
 上面的代码，点击几次按钮来执行 onClick 方法，就可以复现 crash。复现思路是，先让前一个 toast 把 view 添加到 WindowManager，但要让它添加失败，然后第二次另一个 toast 再添加此 view，此次发生 crash，这个思路也是按照前面的猜想来的。首先，上面的代码是将同一个 view 添加到不同的 toast 对象去 show，当添加到第一个 toast 调用 show 方法后，主线程 sleep 1980 毫秒，这个时间是很微妙的，接近 2000 毫秒但是却略少。这个时间可以使得主线程醒来时，toast 的 token 即将失效。不能用更长的 sleep 时间是因为那样的话，主线程还在 sleep 中 token 已失效，token 的失效是在 NotificationManagerService 中产生的，失效后，NotificationManagerService 会处理 MESSAGE_DURATION_REACHED 消息，最终会跨进程调用到 Toast#TN#hide 方法，而这个方法会让我们 app 的主线程消息队列增加一个 HIDE 消息：
 
-![](http://tao93.top/images/2019/01/11/1547217156.png)
+![](https://tao93.top/images/2019/01/11/1547217156.png)
 
 如此一来，当主线程 sleep 结束执行 Toast#TN#handleShow 方法时，就会因消息队列已有 HIDE 消息而提前返回:
 
-![](http://tao93.top/images/2019/01/11/1547217419.png)
+![](https://tao93.top/images/2019/01/11/1547217419.png)
 
 既然都提前返回了，view 也就不会被第一个 toast 添加到 WindowManager，那么也就不符合我们的思路中「让第一个 toast 把 view 添加到 WindowManager 是发生异常」的想法。
 
 所以，需要 1980 毫秒这样一个时间，这个时间使得主线程醒来执行到第一个 toast 的 Toast#TN#handleShow 时，token 还没失效，所以 handleShow 方法不会提前返回，所以 view 会继续往 WindowManager 添加，但是 20 毫秒不足以让这个添加顺利完成，相反，很可能添加时 token 失效了， 于是添加失败，发生第一种 crash 的 BadTokenException (Anddroid 8 以上此异常会被捕获，前文已描述)，这样就符合我们的思路了。下面截图证明了确实发生了 BadTokenException：
 
-![](http://tao93.top/images/2019/01/11/1547217762.png)
+![](https://tao93.top/images/2019/01/11/1547217762.png)
 
 至此，按照前面的思路，此 view 将会无 parent，但是却留在了 WindowManagerGlobal 的 mViews 中，却又不在 mDyingViews 中，于是，当再次按下按钮，执行另一个 toast 添加此 view 的代码时，WindowManagerGlobal#addView 中将发生 IllegalStateException，crash 也就复现了，截图为证：
 
-![](http://tao93.top/images/2019/01/11/1547217909.png)
+![](https://tao93.top/images/2019/01/11/1547217909.png)
 
 至此，toast crash 的分析算是有了一个比较完满的结尾。对于本文中 2019 年 1 月 11 日更新的部分，在此感谢刘成同学提供的帮助，他本来用来复现问题的方式是「先调一个 toast 的 show，sleep 三四秒，然后再用同一个 view 调另一个 toast 的 show」，这个方式因为前面讲的原因而无法复现 crash，但却给了我灵感，让我想到了 1980 毫秒这个时间，最终成功复现了 crash。

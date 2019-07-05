@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
 
 Unplugged and stationary for a period of time, a device would be in doze mode, which restricts all apps regardless whether they targets api 23. However, the OS periodically exits Doze for a brief time to let apps complete their deferred jobs. The bried time slot is called Maintenance window. Below is a figure showing the mode changing:
 
-![](https://tao93.top/images/2018/10/10/1539151703.png)
+![](http://tao93.top/images/2018/10/10/1539151703.png)
 
 In doze mode, the following are restricted:
 
@@ -172,7 +172,7 @@ A lighter Doze mode which activates when the phone is moving in our pockets or h
 
 Ignore Doze configuration:
 
-![](https://tao93.top/images/2018/10/10/1539154768.png)
+![](http://tao93.top/images/2018/10/10/1539154768.png)
 
 #### Background Limits (Since API 26)
 
@@ -210,7 +210,7 @@ A new feature based on Machine Learning.
 
 Apps are arranged into 4 standby buckets: `Active`, `Working set`, `Frequent` and `Rare`. Limits are increased from `Active` to `Rare`:
 
-![](https://tao93.top/images/2018/10/10/1539157914.png)
+![](http://tao93.top/images/2018/10/10/1539157914.png)
 
 An app is in `Active` if it:
 
@@ -277,7 +277,7 @@ Two criterias:
 
 Background restrictions are decided by the users:
 
-![](https://tao93.top/images/2018/10/10/1539156945.png)
+![](http://tao93.top/images/2018/10/10/1539156945.png)
 
 When Background Restrictions is enabled for an app, fllowings are restricted:
 

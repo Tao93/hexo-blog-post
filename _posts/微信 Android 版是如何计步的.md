@@ -7,7 +7,7 @@ tags: [Android]
 
 回到正题，众所周知，微信有个微信运动功能。Android 版微信是怎么计步的呢？我最先是在微信的权限页发现微信声明了 Body Sensors 权限，如下所示：
 
-![](https://tao93.top/images/2018/11/23/1542956043.png)
+![](http://tao93.top/images/2018/11/23/1542956043.png)
 
 这个权限很有迷惑性，让人以为有这个就可以读 Android 系统产生的计步数据了。事实上，把这个权限关了，然后晃动手机 20 次，再进入微信运动，步数很准确的增加了 20 次左右，所以这个权限并不影响读取计步数据。
 
@@ -15,7 +15,7 @@ tags: [Android]
 
 就目前我在网上了解到的信息而言，此权限似乎没什么用，很多帖子都在询问 Google Play Services 为何要使用此权限以及是否可以关闭该权限。我手中的 Pixel XL 也仅有 Google Play Services 和微信声明了此权限：
 
-![](https://tao93.top/images/2018/11/24/1543033517.png)
+![](http://tao93.top/images/2018/11/24/1543033517.png)
 
 根据网上的帖子，在 Android 7 时代的某个时候，Gmail 有个 bug，即关闭 Google Play Services 的 Body Sensors 权限后，Gmail 疯狂弹框显示「This app won't work properly unless you allow Google Play Services' request to access the foloowing: **Body Sensors**」，尽管 Gmail 仍能正常工作。因为此弹框太过怪异，随后谷歌修复了此问题，这说明即使是 Google 自己的应用，也没有严格审查自己是否声明了不必要的权限。
 

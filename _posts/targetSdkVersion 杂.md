@@ -11,13 +11,13 @@ tags: [Android]
 
 在新系统 (api 23 及以上) 中，对于上述的老应用，安装时会列出所有权限，告诉用户这个应用一经安装就有了下面的权限 (如同老系统安装所有应用时一样)。这就是系统的兼容机制。新系统中安装的这样的老应用后，我们在应用详情中可以看到它自动有了所有权限，可是新系统是可以手动关闭某个应用的权限的，如果我们关闭这个老应用的某个权限，会怎么样呢？如下图所示：
 
-![](https://tao93.top/images/2018/09/03/1535985225.png)
+![](http://tao93.top/images/2018/09/03/1535985225.png)
 
 系统会提示用户，关掉权限的话应用可能无法正常运转。这是对的，因为假设老应用中有直接执行拍照逻辑的代码，拍照权限现在被用户手动关闭，那么执行到这样的代码时就会崩溃 (without permission)！
 
 问题是，许多应用明明一直在更新，但是为了尽量获取到各种权限，会故意将 targetSdkVersion 停留在 22 及以下，这样用户一经安装，这样的应用就自动有了它想要的任何权限，例如 Android 版手机 QQ 现在的 targetSdkVersion 依然是 17：
 
-![](https://tao93.top/images/2018/09/03/1535985675.png)
+![](http://tao93.top/images/2018/09/03/1535985675.png)
 
 对于这样的比较无赖的应用，其实可以放心把不想授予的权限关闭掉，它是不会崩溃的，因为其代码中其实已经做了权限检查，毕竟它一直在更新和维护。另外，对于这种现象，Google 也有措施，今年谷歌声明了对在 Google Play 更新的应用和上架的新应用都在今年必须将 targetSdkVersion 升至 27 (步子有点大)。虽然 Google Play 对国内还有点鞭长莫及，不过这一倡导应该还是会让许多大厂的应用更快的提高 targetSdkVersion。
 
@@ -25,7 +25,7 @@ tags: [Android]
 
 动态申请权限大概算是最典型的一个无法完美兼容的 feature 了，除此之外，还有 api 26 引入的 adaptive icon 这个 feature。adaptive icon 使得应用可以根据 launcher 的偏好，显示圆形、圆角方形、正方形等各种形状的图标。许多老应用是直接自己裁剪一个圆角方形的图标，这显然无法完美满足 adaptive icon，所以是不完美兼容。targetSdkVersion 为 26 及以上的应用，应该且需要将 launcher icon 分为 foreground 和 background 两层，foreground 是图标中心的若干元素，比如[黑阈](https://www.coolapk.com/apk/me.piebridge.brevent) 的 launcher icon 的 foreground 是下面这样一张图片：
 
-![](https://tao93.top/images/2018/09/03/1535986448.png)
+![](http://tao93.top/images/2018/09/03/1535986448.png)
 
 这个图片绝大部分都是透明的，只有那 3 条弧线是灰白色的。这样一个 foreground 作为黑阈应用图标的中心元素。而 background 则是 #FF353535 这样一个纯色。事实上，黑阈的在新系统的图标是如下所示的 xml 文件：
 

@@ -26,7 +26,7 @@ java.lang.IllegalArgumentException: Comparison method violates its general contr
 
 上面的 $sgn$ 函数就是下面这样的：
 
-![](https://tao93.top/images/2018/12/22/1545477555.png)
+![](http://tao93.top/images/2018/12/22/1545477555.png)
 
 所以第一条的意思是 x 与 y 的比较结果和 y 与 x 的比较结果必须相反；第二条的意思是，比较结果是具有传递性的，第 3 条是如果 x 和 y 的比较结果是相等的，那么它们与任何 z 的比较结果相同。
 

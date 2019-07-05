@@ -33,15 +33,15 @@ tags: [GSI, Project Treble]
 
 放几张截图：
 
-![](https://tao93.top/images/2019/01/01/1546351524.png)
+![](http://tao93.top/images/2019/01/01/1546351524.png)
 
 最后还有一点，这次我是用 Virtual Box 中的 Win 10 虚拟机刷的，让 VirtualBox 中的 Win 10 虚拟机连接上 Android 设备，需要给 VirtualBox 安装 extension pack，在 Win 10 虚拟机中安装 guest additions，然后还需要在此 win 10 虚拟机的设置中添加对应的 USB filter (需要设备连接上后才能添加)，并按照 USB 类型勾选 USB 2.0 还是 3.0，如下图所示：
 
-![](https://tao93.top/images/2019/01/01/1546352547.png)
+![](http://tao93.top/images/2019/01/01/1546352547.png)
 
 最后，在设备连接上电脑后，把 win 10 的窗口放在最前面，然后再 macOS 的菜单栏勾选对应的 USB device，勾选的话，就是 win 10 虚拟机连接词 USB 设备，否则驾驶 macOS 连接此 USB device，如下图：
 
-![](https://tao93.top/images/2019/01/01/1546353760.png)
+![](http://tao93.top/images/2019/01/01/1546353760.png)
 
 **2019 年 5 月 29 日更新**
 
@@ -51,6 +51,6 @@ tags: [GSI, Project Treble]
 
 注意 Download 模式和 Recovery 是不一样的。TWRP 是 custom recovery，而三星自带的 recovery 是类似下面这样的:
 
-![](https://tao93.top/images/2019/05/29/1559062868.png)
+![](http://tao93.top/images/2019/05/29/1559062868.png)
 
 即使用 TWRP 取代了自带的 Recovery，我们依然可以进入 Download 模式，从而用 odin 刷回到官方 firmware。

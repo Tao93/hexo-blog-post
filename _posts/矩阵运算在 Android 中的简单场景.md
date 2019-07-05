@@ -94,7 +94,7 @@ public static Bitmap createBitmap(Bitmap source, int x, int y, int width, int he
 
 上面代码第 3 行 srcR 将是 source Bitmap 中要被转换的部分。而 dstR 是同样宽高但是左上角在 (0, 0) 的矩形。第 6 行则是将 dstR 变换后得到 deviceR，根据前面所知 的 m 的值，可知deviceR 将会是 left, top, right, bottom 分别是 -height, 0, 0, width:
 
-![](https://tao93.top/images/2018/12/04/1543937277.png)
+![](http://tao93.top/images/2018/12/04/1543937277.png)
 
 即 deviceR 是 dstR 绕原点顺时针旋转 90° 得到的。紧接着代码 7、8 行得到转换后的 Bitmap 的宽高。然后第 9 行以此宽高创建了新的 Bitmap。第 11 行基于此 Bitmap 创建了 canvas。
 

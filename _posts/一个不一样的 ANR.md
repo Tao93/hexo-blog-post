@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 关于 JVM 先调用 UncaughtExceptionHandler 然后把发生未捕获异常的线程停止掉的说法，见于 [Java Language Specification 11.3](https://docs.oracle.com/javase/specs/jls/se8/html/jls-11.html#jls-11.3)，如下所示的片段：
 
-![](https://tao93.top/images/2019/01/18/1547816082.png)
+![](http://tao93.top/images/2019/01/18/1547816082.png)
 
 那么主线程被停止掉，是个什么样的状态呢，我用下面的代码，把主线程的状态给输出来：
 

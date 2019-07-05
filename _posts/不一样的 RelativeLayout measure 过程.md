@@ -5,7 +5,7 @@ tags: [Android]
 
 直接用一个简单的例子展示 RelativeLayout 的不一样之处：
 
-![](https://tao93.top/images/2018/11/01/1541079447.png)
+![](http://tao93.top/images/2018/11/01/1541079447.png)
 
 图中，左边是一个简单的 Android layout 例子，例子中在外侧是一个最大的 horizontal 的 LinearLayout，它有 3 个 child，分别是左部、分割线和右部。左部和右部非常相似，都是外面一个 ViewGroup 内嵌一个 TextView，且 ViewGroup 的高度都是 wrapContent 而内嵌的 TextView 的高度都是 matchParent.
 

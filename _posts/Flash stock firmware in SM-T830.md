@@ -50,6 +50,8 @@ tags: [Firmware, Android, Samsung]
 
 我按照上面说的一步一步走，依然失败，但是没再卡在 setupconnection 了。我总结发现，odin 应该确实有 bug，明明设备连接正常，它就是卡在这一步，这时候可以这么做：1. 重新启动设备，1. 断开 USB 连接，3. 进入 downloading mode，4. 连接 USB 然后再在 odin 中 start，就不会卡在那一步了。
 
+进入 Download 模式的方法：先关机，然后同时按住 Volumn Up 和 Power 键，等屏幕亮后立即松手，此时会进入 Recovery mode (三星自己的 recovery 或者第三方 recovery 比如 TWRP)。如果是三星的 recovery，选择 boot to bootloader 即可，如果是 TWRP，选择进入 Download 模式即可。
+
 回到刚刚说的，虽然没卡在 setupconnection 了，但是依然失败，提示大概是：
 
 > <ID:0/004> abl.elf

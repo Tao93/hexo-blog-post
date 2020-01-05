@@ -1,6 +1,7 @@
 ---
-title: Elliptic curve related groups and fields
+title: Elliptic curve cryptography basics
 tags: [Math, Cryptography]
+mathjax: true
 ---
 
 This is my first post about cryptography. Recently I learnt basics about [public key encryption](https://en.wikipedia.org/wiki/Public-key_cryptography) and the [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) handshake. But the key exhange in the TLS handshake inspected by Wireshark, i.e. [ECDH](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie%E2%80%93Hellman)(Elliptic-curve Diffie–Hellman) troubled me for a while. This this the first time I knew [Elliptic curve](https://en.wikipedia.org/wiki/Elliptic_curve). After some investigation, I'm recording those knowledges in case that I forget them. 
@@ -75,7 +76,7 @@ In last section, we see given $$d$$ and $$m$$, it's easy to get $$dm$$. However,
 
 #### Field
 
-[Field](https://en.wikipedia.org/wiki/Field_(mathematics)) is a set on which addition and multiplication are defined. The two kinds of operations are **closed**, **associative** and **commutative**. Moreover, there are **two identity elements** for both kinds of operations respectively. Finally, there is distributiveness, i.e. $$m(n+r) = mn + mr$$.
+[Field](https://en.wikipedia.org/wiki/Field_(mathematics) is a set on which addition and multiplication are defined. The two kinds of operations are **closed**, **associative** and **commutative**. Moreover, there are **two identity elements** for both kinds of operations respectively. Finally, there is distributiveness, i.e. $$m(n+r) = mn + mr$$.
 
 #### Finite field on prime
 

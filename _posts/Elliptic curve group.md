@@ -26,7 +26,7 @@ equation for red line is $$y^{2}=x^{3}+4x+4$$, equation for purple line is $$y^{
 
 ### Group
 
-Now lets review the [Group](https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGroup_%28mathematics%29) concept. 
+Now lets review the [Group](https://en.wikipedia.org/wiki/Group_(mathematics)) concept. 
 
 A set $$G$$ is a group if a binary operation could be defined on it, and 4 conditions are met. Usually we denote the operation as addition and denoted as $$\oplus$$, then the 4 conditions are:
 
@@ -40,6 +40,12 @@ A group is a [Abelian group](https://en.wikipedia.org/wiki/Abelian_group) if the
 **commutation**: for any $$m$$ and $$n$$ in $$G$$, there is $$m \oplus n = n \oplus m$$
 
 Aparently the set of all real numbers $$R$$ could be an Abelian group with the arithmetic adding operation. 
+
+#### Finite group
+
+A finite group is a group with limited elements. For any element $$m \ne \circledcirc$$ in a group $$G$$, if you repeatly add $$m$$ to itself, you would get $$G$$. I.e. there is a number $$d$$  such that $$dm = \circledcirc $$.
+
+Why? Lets say the group has $$n$$ elements, then the list $$m, 2m, 3m, ..., (n+1)m$$ would have same elements in it. Assume they are $$xm = ym$$, then you see $$(x-y)m = \circledcirc$$.
 
 ### Define group on the elliptic curves
 
@@ -86,7 +92,7 @@ An Abelian Group is a Ring if multiplication denoted as $$\otimes$$ could also b
 
 #### Field
 
-A [Field](https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FField_%28mathematics%29) is a commutative ring which also satisfies:
+A [Field](https://en.wikipedia.org/wiki/Field_(mathematics)) is a commutative ring which also satisfies:
 
 1. additive identity $$\circledcirc$$ is different from multiplicative identity $$I$$.
 2. multiplicative inverse element, for any $$m \ne \circledcirc$$, there is $$n$$ such that $$m \otimes n= I$$, in which we mark $$n = m^{\ominus 1}$$, hence division could be defined: $$a \div b = a \otimes b^{\ominus 1}$$.

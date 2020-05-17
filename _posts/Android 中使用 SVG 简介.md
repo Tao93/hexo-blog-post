@@ -192,8 +192,95 @@ rx 和 rx 确定了椭圆的大小和形状，但没确定位置。当椭圆弧�
 
 ![](http://tao93.top/images/2020/05/16/1589686316.png)
 
+### 实践
+
+给公司 app 的桌面图标做的 vector drawable，其中的 clip path 使得只有这个区域范围内的东西才会显示出来，从而达成一个远交矩阵的效果：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="27dp"
+    android:height="27dp"
+    android:viewportWidth="248"
+    android:viewportHeight="248">
+
+    <!-- clip path which is the big round corner rectangle, thus only inside this area of other parts would be shown -->
+    <clip-path
+        android:pathData="
+            M0,42 a42,42 0 0 1 42,-42 h164
+            a42,42 0 0 1 42 42 v164
+            a42,42, 0 0 1 -42 42 h-164
+            a42,42, 0 0 1 -42 -42 z" />
+    
+    <!-- the blue background of the whole icon -->
+    <path android:fillColor="@color/dossier_icon_bg"
+        android:pathData="M0,0 h248 v248 h-248 z" />
+    
+    <!-- the left rectangle of the center part. 
+    the path data consists of outer clock-wise rect, and 2 inner anti-clock-wise rect. -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="
+            M62,54 l2,-2 h32 l2,2 v121 l-2,2 h-32 l-2,-2 v-121
+            m7,20 v6 l1,1 h19 l1,-1 v-6, l-1,-1 h-19 l-1,1
+            m0,14 v6 l1,1 h19 l1,-1 v-6, l-1,-1 h-19 l-1,1 z"/>
+
+    <!-- upper part of the middle column of the center part -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M112,95 l2,-2 h24 l2,2 v12 h-28 z"/>
+
+    <!-- middle part of the middle column of the center part -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M112,115 h28 v42 h-28 z"/>
+
+    <!-- bottom part of the middle column of the center part -->
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M112,163 h28 v12 l-2,2 h-24 l-2,-2 z"/>
+
+    <!-- the right rectangle of the center part. 
+    the path data consists of outer clock-wise rect, and 2 inner anti-clock-wise rect. -->
+    <path android:fillColor="@color/white"
+        android:pathData="
+            M154,67 l2,-2 h32 l2,2 v108 l-2,2 h-32 l-2,-2 v-108
+            m7,40 v6 l1,1 h19 l1,-1 v-6, l-1,-1 h-19 l-1,1
+            m0,14 v6 l1,1 h19 l1,-1 v-6, l-1,-1 h-19 l-1,1 z" />
+
+    <!-- the bottom white line of the center part -->
+    <path android:fillColor="@color/white"
+        android:pathData="M48,183 l1,-1 h154 l1,1 v6 l-1,1 h-154 l-1,-1 z" />
+
+    <!-- the red area shape -->
+    <path android:fillColor="#d9242e"
+        android:pathData="M0,160 h44 a44,44 0 0 1 44,44 v44 h-88 z" />
+
+    <!-- the 3 small columns above the red area -->
+    <path android:fillColor="@color/white"
+        android:pathData="M20, 180 h11 v40 h-11 z" />
+    <path android:fillColor="@color/white"
+        android:pathData="M39, 180 h11 v40 h-11 z" />
+    <path android:fillColor="@color/white"
+        android:pathData="M58, 180 l11,11 v29 h-11 z" />
+
+</vector>
+```
+
+上面的 vector drawable 的效果就是[这个 app](https://play.google.com/store/apps/details?id=com.microstrategy.android.dossier) 的图标了（当然，是带圆角的）。
+
 #### 其它
 
 除了使用 fill color 来填充 path 内部，还可以用 stroke color 和其它属性来控制笔画的颜色和样式。矢量图规则是非常庞大和复杂的。可以参考 Android 开发文档，或者是 [W3C 的文档](https://www.w3.org/TR/SVG/)。
 
+矢量图在 Android 中的应用已经相当广泛了，只需扫一眼 Google 系列的各个 app，就会发现它们的图标都是扁平化的几何风格，如果解压 apk 再去看 app 桌面图标资源文件，就能确定他们的确用的是矢量图。乔布斯之后，扁平化风格大行其道，这可能也是矢量图的一阵春风吧。
 
+#### 参考资料
+
+[Convert VectorDrawable to SVG](https://stackoverflow.com/questions/44948396/convert-vectordrawable-to-svg)
+
+[SVG | MDN](https://developer.mozilla.org/zh-CN/docs/Web/SVG)
+
+[Android Vector Drawables Fundamentals](https://caster.io/courses/android-vector-drawables-fundamentals)
+
+[Scalable Vector Graphics (SVG) 2](https://www.w3.org/TR/SVG/)

@@ -8,7 +8,7 @@ mathjax: true
 
 可缩放矢量图 (Scalable Vector Graph，以下简称 SVG)，可以大大减小 Android app 中打包的图像资源大小，不用担心图片模糊的问题，很适合用于简单风格或者几何风格的图像。此外在 Android 中，SVG 极大的灵活性，远非其它 drawable 类型（[shape](https://developer.android.com/guide/topics/resources/drawable-resource#Shape)，说的就是你）能比。
 
-事实上不光是 Android，SVG 在 Web 中也应用广泛，维基百科中大量的图表使用了 SVG，来减少网络传输资源的大小。比如维基百科的 [Android (operating system)](https://en.wikipedia.org/wiki/File:Android_new_logo_2019.svg) 中就有一幅 [Android Logo 图片](https://en.wikipedia.org/wiki/File:Android_new_logo_2019.svg) 是 SVG。如果我们下载这个文件，会发现它是一个文本文件：
+事实上不光是 Android，SVG 在 Web 中也应用广泛，维基百科中大量的图表使用了 SVG，来减少网络传输资源的大小。比如维基百科的 [Android (operating system)](https://en.wikipedia.org/wiki/Android_(operating_system)) 中就有一幅 [Android Logo 图片](https://en.wikipedia.org/wiki/File:Android_new_logo_2019.svg) 是 SVG。如果我们下载这个文件，会发现它是一个文本文件：
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -51,11 +51,11 @@ Android 中使用 SVG，我们会创建 drawable XML 文件，里面使用 `vect
 
 ![](http://tao93.top/images/2020/05/16/1589666952.png)
 
-可见 Android 用的 vector drawable 似乎和 web 用的 svg 标签格式不一样。的确不同，不过观察一下，它们都有 path 标签，正是一个一个 path 组成了矢量图的内容。而 path 中的 path data 就是一段信息量很大的文本，里面既有数字也有字母和标点。所幸这个 path data 的规则是通用的，属于 W3C 指定的一套标准，在各个平台都一样。
+可见 Android 用的 vector drawable 似乎和 web 用的 svg 标签格式不一样。的确不同，不过观察一下，它们都有 path 标签，正是一个一个 path 组成了矢量图的内容。而 path 中的 path data 就是一段信息量很大的文本，里面既有数字也有字母和标点。所幸这个 path data 的规则是通用的，属于 W3C 制定的一套标准，在各个平台都一样。
 
 #### Path Data 
 
-Path data 中的字母，被称作命令，一个命令后面跟的 0 个或多个用逗号或空格分隔的数（可以使整数也可以是小数），就是这个命令的参数。这有点像是 Unix 命令。
+Path data 中的字母，被称作命令，一个命令后面跟的 0 个或多个用逗号或空格分隔的数（可以是整数也可以是小数），就是这个命令的参数。这有点像是 Unix 命令。
 
 命令的大小写有不同。大写表示命令后面的参数当做坐标时是绝对坐标，小写时表示参数当做相对坐标（相对于该命令之前，path 已经抵达的位置点）。
 
@@ -161,7 +161,7 @@ A / a 命令有 7 个参数，这 7 个参数依序命令为 rx, ry, x-axis-rota
 
 中途解释：
 
-rx 和 rx 确定了椭圆的大小和性状，但没确定位置。当椭圆弧的起点 （path 的当前位置点）和终点（最后两个参数）固定后，大小和性状固定的椭圆需要经过这两个点，但椭圆本身依然可以在这两个点上滑动和翻转（只要翻转后长轴方向没变），所以才需要 x-axis-rotation 参数确定一个角度，从而椭圆不能滑动。
+rx 和 rx 确定了椭圆的大小和形状，但没确定位置。当椭圆弧的起点 （path 的当前位置点）和终点（最后两个参数）固定后，大小和形状固定的椭圆需要经过这两个点，但椭圆本身依然可以在这两个点上滑动和翻转（只要翻转后长轴方向没变），所以才需要 x-axis-rotation 参数确定一个角度，从而椭圆不能滑动。
 
 然而，在角度固定时，下图中 1, 2, 3, 4 所指的 4 条弧表明，还是有 4 种情况，这时候就需要参数 large-arc-flag 和 sweep-flag 来四选一了。
 
